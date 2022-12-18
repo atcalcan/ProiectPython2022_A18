@@ -25,7 +25,7 @@
 > - `def getPosition()`: Funcția folosită pentru a deduce poziția unde playerul vrea să așeze piesa din coordonatele cursorului. După ce coordonatele sunt identificate și mutarea este verificată, se apelează `tura.next()`.
 > - `def computerMove()`: Calculatorul generează coordonate random `i` și `j` până obține o mutare validă, urmând ca `tura.next()` să fie apelată.
 
-> Librării folosite:
+## Librării folosite:
 > - `pygame`
 > - `numpy`
 > - `sys`
