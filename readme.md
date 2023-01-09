@@ -2,7 +2,7 @@
 ### #A18
 ### Calcan Teodor Alexandru
 
-- Interfață grafică minimală pentur un joc de GO.
+- Interfață grafică minimală pentru un joc de GO.
 - Opțiunea de a juca în doi sau cu mutările aleatoare ale calculatorului.
 
 ## Funcții
@@ -22,6 +22,7 @@
 > - `def checkMove(tura: Tura, i, j)`: Verifică dacă o mutare este corectă din punct de vedere al regulilor jocului, înainte ca aceasta să fie efectuată.
 > - `def drawGrid(i: int, tura: Tura)`: Funcția apelată constant de `pygame` pentru a desena pe ecran tabela de joc și piesele aflate pe tablă.
 > - `def draw_window()`: Funcția apelată de `pygame` pentru a desena pe ecran elementele care vor rămâne constante de-a lungul jocului.
+> - `def drawWinner(s1, s2)`: Funcția folosită pentru a afișa text pe ecran cu scorurile finale și cu câștigatorul, la încheierea jocului.
 > - `def getPosition()`: Funcția folosită pentru a deduce poziția unde playerul vrea să așeze piesa din coordonatele cursorului. După ce coordonatele sunt identificate și mutarea este verificată, se apelează `tura.next()`.
 > - `def computerMove()`: Calculatorul generează coordonate random `i` și `j` până obține o mutare validă, urmând ca `tura.next()` să fie apelată.
 

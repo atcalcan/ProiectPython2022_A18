@@ -1,3 +1,4 @@
+import time
 import pygame
 import numpy as np
 import sys
@@ -185,6 +186,18 @@ def checkMove(tura: Tura, i, j):
         return True
 
 
+def checkBoard(tura: Tura):
+    possibleMoves = 0
+    for i in range(len(tura.grid)):
+        for j in range(len(tura.grid[i])):
+            if checkMove(tura, i, j):
+                possibleMoves += 1
+    if possibleMoves > 0:
+        return True
+    else:
+        return False
+
+
 def drawGrid(i: int, tura: Tura):
     blockSize = WIDTH // (i)
     width = WIDTH - WIDTH % i
@@ -215,7 +228,45 @@ def drawGrid(i: int, tura: Tura):
 def draw_window():
     WIN.fill(GREY)
     drawGrid(GRID_SIZE, tura)
+    if checkBoard(tura) == False:
+        print('Gata')
+        (s1, s2) = tura.scores
+        drawWinner(s1, s2)
+        time.sleep(5)
+        pygame.display.quit()
+        pygame.quit()
+        sys.exit()
+    else:
+        pygame.display.update()
+
+
+def drawWinner(s1, s2):
+    pygame.font.init()
+    font = pygame.font.Font('freesansbold.ttf', 32)
+    textForDisplay = ''
+    textForDisplay = textForDisplay + f'Player 1: {s1}; Player 2: {s2};'
+    text = font.render(textForDisplay, True, (255, 0, 0), (0, 0, 0))
+    textRect = text.get_rect()
+    textRect.center = (255, 255)
+    # WIN.fill(GREY)
+    # drawGrid(GRID_SIZE, tura)
+    WIN.blit(text, textRect)
     pygame.display.update()
+    time.sleep(2)
+    WIN.fill(GREY)
+    if (s1 > s2):
+        textForDisplay = 'Player 1 wins!'
+    elif s2 > s1:
+        textForDisplay = 'Player 2 wins!'
+    else:
+        textForDisplay = 'Equality!'
+    text = font.render(textForDisplay, True, (255, 0, 0), (0, 0, 0))
+    textRect = text.get_rect()
+    textRect.center = (255, 255)
+    drawGrid(GRID_SIZE, tura)
+    WIN.blit(text, textRect)
+    pygame.display.update()
+    print()
 
 
 def getPosition():
@@ -257,7 +308,7 @@ if (sys.argv[1] == 'computer'):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-            elif event.type == pygame.MOUSEBUTTONDOWN:
+            elif event.type == pygame.MOUSEBUTTONDOWN and checkBoard(tura):
                 mouse_pressed = pygame.mouse.get_pressed()
                 # print(mouse_pressed)
                 if mouse_pressed == (True, False, False):
